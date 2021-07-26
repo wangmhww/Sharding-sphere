@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wm.shardingspherejdbc.mapper.MemberMapper">
+
+    <resultMap id="member_result_basic" type="com.wm.shardingspherejdbc.model.Member">
+        <result jdbcType="BIGINT" property="memberId" column="member_id"></result>
+        <result jdbcType="VARCHAR" property="memberName" column="member_name"></result>
+        <result jdbcType="VARCHAR" property="nickName" column="nick_name"></result>
+        <result jdbcType="VARCHAR" property="accountNo" column="account_no"></result>
+        <result jdbcType="VARCHAR" property="password" column="password"></result>
+        <result property="age" jdbcType="INTEGER" column="age"></result>
+        <result property="birthDate" jdbcType="TIMESTAMP" column="birth_date"></result>
+        <result jdbcType="VARCHAR" property="eblFlag" column="ebl_flag"></result>
+        <result jdbcType="VARCHAR" property="delFlag" column="del_flag"></result>
+        <result jdbcType="VARCHAR" property="description" column="description"></result>
+        <result jdbcType="TIMESTAMP" property="createTime" column="create_time"></result>
+        <result jdbcType="TIMESTAMP" property="updateTime" column="update_time"></result>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        member_id, member_name, nick_name, account_no, password, age, birth_date, ebl_flag, del_flag, description, create_time, update_time
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete t_member WHERE   member_id = #{memberId}
+    </delete>
+
+    <insert id="insert"  parameterType="com.wm.shardingspherejdbc.model.Member">
+        insert into t_member (member_id, member_name, nick_name, account_no, password, age, birth_date, ebl_flag, del_flag, description, create_time, update_time)
+            values(#{memberId}, #{memberName}, #{nickName}, #{accountNo}, #{password}, #{age}, #{birthDate}, #{eblFlag}, #{delFlag}, #{description}, #{createTime}, #{updateTime})
+    </insert>
+
+    <select id="getMemberByPrimaryKey" parameterType="java.lang.Long" resultMap="member_result_basic">
+        select
+            <include refid="Base_Column_List"></include>
+        from t_member where member_id = #{memberId}
+    </select>
+</mapper>
