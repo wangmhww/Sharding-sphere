@@ -4,25 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
  * @author: wangm
- * @date: 2021/7/23 15:57
+ * @date: 2021/7/27 16:16
  * @Description
  */
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class OrderItem {
-    private Long itemId;
-
-    private String orderId;
+@NoArgsConstructor
+public class OrderVo {
+    private Long memberId;
 
     private String productName;
 
     private Double itemAccount;
-
-    private Date createTime;
 }
